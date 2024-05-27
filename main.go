@@ -4,24 +4,34 @@ import (
     "fmt"
     "net/http"
     "encoding/json"
-    "github.com/AllesMUX/MUXworker/tasks"
     "github.com/AllesMUX/MUXworker/cpu"
 )
 
-type ServerStatus struct {
+type ServerStatusJSON struct {
     CPULoadAvg float64 `json:"cpu_load_avg"`
     ActiveTasks int `json:"active_tasks"`
 }
 
-func IncrementTasks() {
-    tasks.IncrementTasks()
+type TasksManager struct {
+    count int
 }
 
-func DecrementTasks() {
-    tasks.DecrementTasks()
+func (tm *TasksManager) IncrementTasks() {
+    fmt.Printf("incrim %d\n",tm.count)
+    tm.count++
 }
 
-func NewTasksCountService(port string) {
+func (tm *TasksManager) DecrementTasks() {
+    fmt.Printf("decrim %d\n",tm.count)
+    tm.count--
+}
+
+func (tm *TasksManager) GetActiveTasks() int {
+    return tm.count
+}
+
+func (tm *TasksManager) NewTasksCountService(port string) {
+    tm.count = 0
     go func() {
         for {
             cpu.UpdateCPUStats()
@@ -30,9 +40,9 @@ func NewTasksCountService(port string) {
     
     http.HandleFunc("/server-health", func(w http.ResponseWriter, r *http.Request) {
         w.Header().Set("Content-Type", "application/json")
-        json.NewEncoder(w).Encode(ServerStatus{
+        json.NewEncoder(w).Encode(ServerStatusJSON{
             CPULoadAvg: cpu.GetCPUStats().LoadAvg,
-            ActiveTasks: tasks.GetActiveTasks().Count,
+            ActiveTasks: tm.GetActiveTasks(),
         })
     })
 

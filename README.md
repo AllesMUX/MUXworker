@@ -19,11 +19,13 @@ This will start the HTTP server on port 8080. You can then send a GET request to
 
 To manage tasks in your worker service, you can use functions, `IncrementTasks` and `DecrementTasks`, that allow you to increment or decrement the number of active tasks, respectively. For example:
 ```go
+var tm = MUXworker.TasksManager{}
+tm.NewTasksCountService(":8888")
 var tasks = make(chan func(), 10)
 tasks <- func() {
-	MUXworker.IncrementTasks()
+	tm.IncrementTasks()
 	/* task code */
-	MUXworker.DecrementTasks()
+	tm.DecrementTasks()
 }
 ```
 

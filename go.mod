@@ -1,6 +1,6 @@
 module github.com/AllesMUX/MUXworker
 
-go 1.22.1
+go 1.22
 
 require github.com/shirou/gopsutil v3.21.11+incompatible
 
