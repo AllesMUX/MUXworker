@@ -5,12 +5,9 @@ import (
     "net/http"
     "encoding/json"
     "github.com/AllesMUX/MUXworker/cpu"
+    "github.com/AllesMUX/MUXworker/structs"
 )
 
-type ServerStatusJSON struct {
-    CPULoadAvg float64 `json:"cpu_load_avg"`
-    ActiveTasks int `json:"active_tasks"`
-}
 
 type TasksManager struct {
     count int
@@ -40,7 +37,7 @@ func (tm *TasksManager) NewTasksCountService(port string) {
     
     http.HandleFunc("/server-health", func(w http.ResponseWriter, r *http.Request) {
         w.Header().Set("Content-Type", "application/json")
-        json.NewEncoder(w).Encode(ServerStatusJSON{
+        json.NewEncoder(w).Encode(structs.ServerStatusJSON{
             CPULoadAvg: cpu.GetCPUStats().LoadAvg,
             ActiveTasks: tm.GetActiveTasks(),
         })
