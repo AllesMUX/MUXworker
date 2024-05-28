@@ -1,3 +1,5 @@
+github.com/AllesMUX/MUXworker/structs v0.0.0-20240527222512-ce87eb7cc523 h1:mCW0JIvWWRaR2iYZfI2T7ivs1HGoSU/3CKDwXlqtDc0=
+github.com/AllesMUX/MUXworker/structs v0.0.0-20240527222512-ce87eb7cc523/go.mod h1:GC//WLFdm6+HQjorfb94TSCB4DzUn4L+mkQx/Ar9Xc0=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/go-ole/go-ole v1.2.6 h1:/Fpf6oFPoeFik9ty7siob0G6Ke8QvQEuVcuChpwXzpY=

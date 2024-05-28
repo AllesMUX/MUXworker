@@ -37,12 +37,13 @@ func (tm *TasksManager) NewTasksCountService(port string) {
     
     http.HandleFunc("/server-health", func(w http.ResponseWriter, r *http.Request) {
         w.Header().Set("Content-Type", "application/json")
+        w.Header().Set("Access-Control-Allow-Origin", "*")
         json.NewEncoder(w).Encode(structs.ServerStatusJSON{
             CPULoadAvg: cpu.GetCPUStats().LoadAvg,
             ActiveTasks: tm.GetActiveTasks(),
         })
     })
 
-    fmt.Printf("Service is listening on port %s...\n", port)
+    fmt.Printf("MUXworker service is listening on port %s...\n", port)
     go http.ListenAndServe(port, nil)
 }

@@ -2,7 +2,10 @@ module github.com/AllesMUX/MUXworker
 
 go 1.22
 
-require github.com/shirou/gopsutil v3.21.11+incompatible
+require (
+	github.com/AllesMUX/MUXworker/structs v0.0.0-20240527222512-ce87eb7cc523
+	github.com/shirou/gopsutil v3.21.11+incompatible
+)
 
 require (
 	github.com/go-ole/go-ole v1.2.6 // indirect
